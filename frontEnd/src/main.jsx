@@ -21,8 +21,7 @@ const App = () => {
           <Route path="/admin/login" element={<Login page={"admin"} />} />
           <Route path="/admin/signup" element={<SignUp page={"admin"} />} />
           <Route
-            path={"/admin/dashboard"}
-            element={<ProtectedComponent></ProtectedComponent>}
+            path={"/admin/dashboard"} element={<ProtectedComponent></ProtectedComponent>}
           >
             <Route path="jarvis" element={<div>Wh</div>} />
           </Route>

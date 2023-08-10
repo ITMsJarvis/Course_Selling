@@ -1,5 +1,7 @@
+import AuthGuard from "../../authGuard/authGuard";
+
 const dashboardAdmin = () => {
   return <div>dashboardAdmin</div>;
 };
 
-export default dashboardAdmin;
+export default AuthGuard(dashboardAdmin) ;

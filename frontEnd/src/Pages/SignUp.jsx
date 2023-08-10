@@ -1,41 +1,36 @@
 import { Typography, Card, TextField, Button } from "@mui/material";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-
-const SignIn = ({page}) => {
+const SignIn = ({ page }) => {
   // let navigate = useNavigate();
-  console.log("====>" , page)
+  console.log("====>", page);
   let [signUpData, setData] = useState({
-    firstName: " ",
-    surName: "",
-    mobileNumberOrEmailId: "",
+    firstname: "",
+    lastname: "",
+    MobileNumber: "",
     username: "",
     password: "",
   });
   async function sendBackEnd() {
-    try{
-await fetch(`http://localhost:4000/${page}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signUpData),
-    }).then(() => {
-      console.log("Sent Your Data to the BackEnd");
-    });
-    alert("You have successfully created");
-    }catch(err){
-console.log(err)
-    }
-    
-    function ClickMe(){
-      
+    try {
+      await fetch(`http://localhost:4000/${page}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signUpData),
+      }).then(() => {
+        console.log("Sent Your Data to the BackEnd");
+      });
+      alert("You have successfully created");
+    } catch (err) {
+      console.log(err);
     }
   }
   return (
-    <div style={{ marginTop: "10rem"}}>
+    <div style={{ marginTop: "10rem" }}>
       <Card
         variant="outlined"
         style={{
@@ -46,7 +41,7 @@ console.log(err)
         }}
       >
         <Typography variant="h2" style={{ marginTop: "1rem" }}>
-         Hi {page.toUpperCase()}
+          Hi {page.toUpperCase()}
         </Typography>
         <Typography variant="h5" style={{ marginTop: "1rem" }}>
           Welcome To SignUp
@@ -60,10 +55,9 @@ console.log(err)
               label="FIRST NAME"
               style={{ flex: 1 }}
               margin="none"
-              onChange={(e) =>{
-               setData({...signUpData , firstName: e.target.value})
-              }
-              }
+              onChange={(e) => {
+                setData({ ...signUpData, firstname: e.target.value });
+              }}
             />
             <TextField
               variant="outlined"
@@ -71,7 +65,7 @@ console.log(err)
               style={{ flex: 1 }}
               margin="none"
               onChange={(e) => {
-                 setData({...signUpData , surName: e.target.value})
+                setData({ ...signUpData, lastname: e.target.value });
               }}
             />
           </div>
@@ -81,11 +75,9 @@ console.log(err)
             label="MOBILE/EMAIL"
             fullWidth
             margin="none"
-            onChange={(e) =>
-             {
-               setData({...signUpData , mobileNumberOrEmailId: e.target.value})
-             }
-            }
+            onChange={(e) => {
+              setData({ ...signUpData, MobileNumber: e.target.value });
+            }}
           />
           <br />
           <br />
@@ -95,7 +87,7 @@ console.log(err)
             fullWidth
             margin="none"
             onChange={(e) => {
-              setData({...signUpData, username :  e.target.value })
+              setData({ ...signUpData, username: e.target.value });
             }}
           />
           <br />
@@ -107,7 +99,7 @@ console.log(err)
             fullWidth
             margin="none"
             onChange={(e) => {
-              setData({...signUpData, password :  e.target.value })
+              setData({ ...signUpData, password: e.target.value });
             }}
           />
           <br />
@@ -115,18 +107,30 @@ console.log(err)
 
         <br />
         <br />
-        <div style={{display: 'flex', justifyContent: 'center' , gap:"30px"}}>
-         
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "black" }}
-          onClick={sendBackEnd}
-        >
-        <Link to={`/${page}/login`} style={{textDecoration : 'none' , color: 'white'}} >  SignUp </Link>
-        </Button>
-        
-  
-        <Button variant="contained" style={{backgroundColor : 'black'}}><Link to={`/${page}/login`} style={{textDecoration : 'none' , color: 'white'}} >  Login</Link></Button>
+        <div style={{ display: "flex", justifyContent: "center", gap: "30px" }}>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "black" }}
+            onClick={sendBackEnd}
+          >
+            <Link
+              to={`/${page}/login`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              {" "}
+              SignUp{" "}
+            </Link>
+          </Button>
+
+          <Button variant="contained" style={{ backgroundColor: "black" }}>
+            <Link
+              to={`/${page}/login`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              {" "}
+              Login
+            </Link>
+          </Button>
         </div>
       </Card>
     </div>

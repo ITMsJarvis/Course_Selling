@@ -8,48 +8,45 @@ import {
   IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const SignIn = ({page}) => {
- 
+const SignIn = ({ page }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [signInData, setData] = useState({
     username: "",
     password: "",
-  });  
+  });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
- function sendData() {
-  
-  let {username , password} = signInData
- 
-  fetch(`http://localhost:4000/${page}/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "username" : username,
-      "password" : password
-    },
-  })
-    .then((response) => response.json())
-    .then(({ message, token }) => {
-      if (message === 'Logged in successfully') {
-        localStorage.setItem('token', token);
-      } else {
-        alert('Invalid Credentials');
-      }
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-      alert('Error fetching data');
-    });
-}
+  function sendData() {
+    let { username, password } = signInData;
 
+    fetch(`http://localhost:4000/${page}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        username: username,
+        password: password,
+      },
+    })
+      .then((response) => response.json())
+      .then(({ message, token }) => {
+        if (message === "Logged in successfully") {
+          localStorage.setItem("token", token);
+        } else {
+          alert("Invalid Credentials");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        alert("Error fetching data");
+      });
+  }
 
   let fullWidth = {
     width: "100%",
@@ -67,7 +64,7 @@ const SignIn = ({page}) => {
         }}
       >
         <Typography variant="h3" style={{ marginTop: "1rem" }}>
-          Welcome  {page.substr(0,1).toUpperCase()+ page.substr(1)}
+          Welcome {page.substr(0, 1).toUpperCase() + page.substr(1)}
         </Typography>
         <br />
         <>
@@ -114,8 +111,12 @@ const SignIn = ({page}) => {
           style={{ backgroundColor: "black" }}
           onClick={sendData}
         >
-          <Link to={`${page}/courses`} style={{color : 'white' , textDecoration :  'none'}}>{"SignIn"} </Link> 
-          
+          <Link
+            to={`/${page}/dashboard`}
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            {"SignIn"}{" "}
+          </Link>
         </Button>
       </Card>
     </div>

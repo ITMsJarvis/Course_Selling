@@ -1,21 +1,53 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from "react";
+import AuthGuard from "../authGuard/authGuard";
+import Navbar from "../components/common/Navbar";
+import axios from "axios";
+import { Card, Grid, CardContent, CardMedia, Typography } from "@mui/material";
 
-const Courses = () => {
-let [data , dataFnx] = useState({})
+const Courses = ({ page }) => {
+  let [content, setContent] = useState(null);
+  function deleteToken() {
+    localStorage.removeItem("token");
+    return (window.location.href = "/");
+  }
+  let navLinks = {
+    buttonData: [["/admin", "Logout", deleteToken]],
+  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/admin/courses", {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => setContent(response.data.courses));
+  }, []);
 
-useEffect(()=> {
-fetch("http://localhost:4000/login/courses" , {
-    method : 'POST',
-    headers : {
-        "Content-Type" : 'application/json', 
-        "token" : localStorage.getItem("token")
-    } 
-}).then(x=> x.json()).then(data=> dataFnx(data))
-}, [])
-
-console.log(data)
-
-  return <div>This is courses</div>;
+  console.log(content);
+  return (
+    <>
+      <Navbar navlink={navLinks}></Navbar>
+      <Grid container justifyContent="center" alignItems="center" margin={1} spacing={5}>
+        {content?.map((x) => (
+          <Grid item key={x._id} xs={12} sm={6} md={3} lg={3}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="140"
+                image={x.imageLink}
+                alt={x.title}
+              />
+              <CardContent>
+                <Typography variant="h6">{x.title}</Typography>
+                <Typography variant="body2">{x.description}</Typography>
+                <Typography variant="subtitle1">${x.price}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </>
+  );
 };
 
-export default Courses;
+export default AuthGuard(Courses);

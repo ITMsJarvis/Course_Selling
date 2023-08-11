@@ -1,11 +1,10 @@
 import { Typography, Card, TextField, Button } from "@mui/material";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const SignIn = ({ page }) => {
-  // let navigate = useNavigate();
-  console.log("====>", page);
   let [signUpData, setData] = useState({
     firstname: "",
     lastname: "",
@@ -15,16 +14,13 @@ const SignIn = ({ page }) => {
   });
   async function sendBackEnd() {
     try {
-      await fetch(`http://localhost:4000/${page}/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
-      }).then(() => {
-        console.log("Sent Your Data to the BackEnd");
-      });
-      alert("You have successfully created");
+      const response = await axios.post(
+        `http://localhost:4000/${page}/signup`,
+        signUpData
+      );
+      if (response.data.message === "Admin created successfully") {
+        window.location.href = "/admin/login";
+      }
     } catch (err) {
       console.log(err);
     }
@@ -113,13 +109,7 @@ const SignIn = ({ page }) => {
             style={{ backgroundColor: "black" }}
             onClick={sendBackEnd}
           >
-            <Link
-              to={`/${page}/login`}
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              {" "}
-              SignUp{" "}
-            </Link>
+            SignUp
           </Button>
 
           <Button variant="contained" style={{ backgroundColor: "black" }}>

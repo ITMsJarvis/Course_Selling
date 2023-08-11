@@ -6,8 +6,8 @@ import Login from "./Pages/Login";
 import MainPage from "./Pages/MainPage";
 import Admin from "./pages/admin/Admin";
 import Users from "./pages/user/Users";
-import ProtectedComponent from "./services/HOC";
-// import { Course } from "../../backEnd/db";
+import Coures from "./pages/Courses";
+import DashboardAdmin from "./pages/admin/dashboardAdmin";
 
 const App = () => {
   return (
@@ -20,11 +20,11 @@ const App = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<Login page={"admin"} />} />
           <Route path="/admin/signup" element={<SignUp page={"admin"} />} />
+          <Route path={"/admin/courses"} element={<Coures></Coures>} />
           <Route
-            path={"/admin/dashboard"} element={<ProtectedComponent></ProtectedComponent>}
-          >
-            <Route path="jarvis" element={<div>Wh</div>} />
-          </Route>
+            path={"/admin/dashboard"}
+            element={<DashboardAdmin></DashboardAdmin>}
+          />
 
           {/* USERS */}
           <Route path="/user" element={<Users />} />

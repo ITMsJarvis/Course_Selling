@@ -24,11 +24,9 @@ router.post("/signup", (req, res) => {
     if (admin) {
       res.status(403).json({ message: "Admin already exists" });
     } else {
-      const token = jwt.sign({ username, role: "admin" }, SECRET);
-      const obj = { ...req.body, token: token };
-      const newAdmin = new Admin(obj);
+      const newAdmin = new Admin(req.body);
       newAdmin.save();
-      res.json({ message: "Admin created successfully", token });
+      res.json({ message: "Admin created successfully" });
     }
   }
   Admin.findOne({ username }).then(callback);

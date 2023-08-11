@@ -12,7 +12,17 @@ const Admin = () => {
   return (
     <>
       <Navbar navlink={navLinks}></Navbar>
-      <Typography variant="h6">Hi Admins How are you</Typography>
+      <Typography
+        variant="h6"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "80vh",
+        }}
+      >
+        Hi Admins, How are you?
+      </Typography>
     </>
   );
 };

@@ -8,8 +8,8 @@ import {
   IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const SignIn = ({ page }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,18 +26,23 @@ const SignIn = ({ page }) => {
   function sendData() {
     let { username, password } = signInData;
 
-    fetch(`http://localhost:4000/${page}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        username: username,
-        password: password,
-      },
-    })
-      .then((response) => response.json())
-      .then(({ message, token }) => {
+    axios
+      .post(
+        `http://localhost:4000/${page}/login`,
+        {},
+        {
+          headers: {
+            username: username,
+            password: password,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        let { message, token } = response.data;
         if (message === "Logged in successfully") {
           localStorage.setItem("token", token);
+          window.location.href = `/${page}/dashboard`;
         } else {
           alert("Invalid Credentials");
         }
@@ -111,12 +116,7 @@ const SignIn = ({ page }) => {
           style={{ backgroundColor: "black" }}
           onClick={sendData}
         >
-          <Link
-            to={`/${page}/dashboard`}
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            {"SignIn"}{" "}
-          </Link>
+          {"SignIn"}
         </Button>
       </Card>
     </div>

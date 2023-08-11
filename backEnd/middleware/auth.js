@@ -5,11 +5,11 @@ const SECRET = process.env.SECRET;
 const authenticateJwt = (req, res, next) => {
   let { token } = req.headers;
   if (token) {
-    jwt.verify(token, SECRET, (err, user) => {
+    jwt.verify(token, SECRET, (err, data) => {
       if (err) {
         return res.sendStatus(403);
       }
-      req.user = user;
+      req.data = data;
       next();
     });
   } else {

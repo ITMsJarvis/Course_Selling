@@ -1,10 +1,8 @@
-import { TrendingUpRounded } from "@mui/icons-material";
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
+import {Typography} from "@mui/material"
 
 const AuthGuard = (WrappedComponent) => {
-  // will check from the http request whether the token is verified or not? and will then return either the component
-  // or UNAUTHORIZED
 
   const GuardedComponent = (props) => {
     const [isAuthenticated, setAuthentaction] = React.useState(false);
@@ -24,7 +22,7 @@ const AuthGuard = (WrappedComponent) => {
     } else {
       return (
         <>
-          <h1>UNAUTHORIZED</h1>
+          <Typography variant="h4">UNAUTHORIZED ACCESS</Typography>
         </>
       );
     }

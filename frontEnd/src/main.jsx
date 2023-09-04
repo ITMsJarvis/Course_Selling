@@ -1,13 +1,14 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./index.css";
-import SignUp from "./Pages/SignUp";
-import Login from "./Pages/Login";
-import MainPage from "./Pages/MainPage";
-import Admin from "./pages/admin/Admin";
-import Users from "./pages/user/Users";
-import Coures from "./pages/Courses";
-import DashboardAdmin from "./pages/admin/dashboardAdmin";
+import SignUp from "./components/SignUp/SignUp"
+import Login from "./components/Login/Login";
+import MainPage from "./components/MainPage/MainPage";
+import Admin from "./components/Admin/Admin";
+import Users from "./components/Users/Users";
+import Coures from "./components/Courses/Courses";
+import DashboardAdmin from "./components/Admin/dashboardAdmin";
+import "./main.css"
+import AddCourses from "./components/Courses/AddCourses";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/admin/login" element={<Login page={"admin"} />} />
           <Route path="/admin/signup" element={<SignUp page={"admin"} />} />
           <Route path={"/admin/courses"} element={<Coures></Coures>} />
+          <Route path={"/admin/addcourses"} element={<AddCourses></AddCourses>} ></Route>
           <Route
             path={"/admin/dashboard"}
             element={<DashboardAdmin></DashboardAdmin>}

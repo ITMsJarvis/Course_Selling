@@ -8,12 +8,13 @@ import {
   IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 const SignIn = ({ page }) => {
+  let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
   const [signInData, setData] = useState({
     username: "",
     password: "",
@@ -24,32 +25,25 @@ const SignIn = ({ page }) => {
   };
 
   function sendData() {
-    let { username, password } = signInData;
-
+    let { username, password } = signInData;  
     axios
       .post(
         `http://localhost:4000/${page}/login`,
-        {},
-        {
-          headers: {
-            username: username,
-            password: password,
-          },
-        }
+        {username :username , password :password},
       )
       .then((response) => {
         console.log(response);
         let { message, token } = response.data;
+        console.log("===>" , message)
         if (message === "Logged in successfully") {
           localStorage.setItem("token", token);
-          window.location.href = `/${page}/dashboard`;
+          navigate(`/${page}/dashboard`);
         } else {
           alert("Invalid Credentials");
         }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
-        alert("Error fetching data");
+        alert(error.response.data.message)
       });
   }
 
@@ -59,13 +53,15 @@ const SignIn = ({ page }) => {
 
   return (
     <div style={{ marginTop: "10rem" }}>
-      <Card
+     <Card
         variant="outlined"
         style={{
           textAlign: "center",
+           borderRadius: "30px",
           margin: "0 auto",
           padding: "10px",
           maxWidth: "400px",
+           boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
         }}
       >
         <Typography variant="h3" style={{ marginTop: "1rem" }}>

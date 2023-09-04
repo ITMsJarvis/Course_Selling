@@ -7,6 +7,7 @@ const { authenticateJwt } = require("../middleware/auth");
 
 const router = express.Router();
 
+
 router.get("/me", authenticateJwt, async (req, res) => {
   const admin = await Admin.findOne({ username: req.user.username });
   if (!admin) {
@@ -33,7 +34,7 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.headers;
+  const { username, password } = req.body;
   const admin = await Admin.findOne({ username, password });
   if (admin) {
     const token = jwt.sign({ username, role: "admin" }, SECRET, {
@@ -46,8 +47,10 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/courses", authenticateJwt, async (req, res) => {
+  const {price, currency} = req.body
   const course = new Course({
     ...req.body,
+    price: `${price} ${currency}` ,
     id: Math.floor(Math.random() * 10000),
   });
   await course.save();

@@ -11,11 +11,9 @@ const Navbar = (prop) => {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" style={{ backgroundColor: "black" }}>
             <Toolbar>
-              <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                TVT
-                <HubIcon />
+              <Typography variant="h3" sx={{ flexGrow: 1 }} style={{fontFamily: 'Teko'}}>
+                TVF
               </Typography>
-
               <div style={{ display: "flex", gap: "15px" }}>
                 {buttonData?.map((x, index) => (
                   <>
@@ -23,6 +21,8 @@ const Navbar = (prop) => {
                       key={index}
                       variant={"contained"}
                       style={{
+                        fontFamily: 'Teko',
+                        fontSize: '20px',
                         backgroundColor: whiteBackground.includes(x[1])
                           ? "white"
                           : "black",

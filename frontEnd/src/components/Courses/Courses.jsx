@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import AuthGuard from "../authGuard/authGuard";
-import Navbar from "../components/common/Navbar";
+import AuthGuard from "../../authentication/authGuard";
+import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import { Card, Grid, CardContent, CardMedia, Typography } from "@mui/material";
 
@@ -11,7 +11,7 @@ const Courses = ({ page }) => {
     return (window.location.href = "/");
   }
   let navLinks = {
-    buttonData: [["/admin", "Logout", deleteToken]],
+    buttonData: [["/admin/addcourses" , "addCourses"],["/admin", "Logout", deleteToken]],
   };
   useEffect(() => {
     axios
@@ -22,8 +22,6 @@ const Courses = ({ page }) => {
       })
       .then((response) => setContent(response.data.courses));
   }, []);
-
-  console.log(content);
   return (
     <>
       <Navbar navlink={navLinks}></Navbar>

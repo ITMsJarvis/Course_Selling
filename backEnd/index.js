@@ -9,6 +9,7 @@ const { authenticateJwt } = require("./middleware/auth");
 const app = express();
 
 app.use(cors());
+
 app.use(express.json());
 
 app.use("/admin", adminRouter);
@@ -31,7 +32,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: "CourseSellingGithub",
+    dbName: "database",
   }
 );
 

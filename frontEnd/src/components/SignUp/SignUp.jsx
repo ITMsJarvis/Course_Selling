@@ -18,8 +18,8 @@ const SignIn = ({ page }) => {
         `http://localhost:4000/${page}/signup`,
         signUpData
       );
-      if (response.data.message === "Admin created successfully") {
-        window.location.href = "/admin/login";
+      if (response.data.message) {
+        window.location.href = `/${page}/login`;
       }
     } catch (err) {
       console.log(err);
@@ -27,17 +27,19 @@ const SignIn = ({ page }) => {
   }
   return (
     <div style={{ marginTop: "10rem" }}>
-      <Card
-        variant="outlined"
-        style={{
-          textAlign: "center",
-          margin: "0 auto",
-          padding: "10px",
-          maxWidth: "400px",
-        }}
-      >
-        <Typography variant="h2" style={{ marginTop: "1rem" }}>
-          Hi {page.toUpperCase()}
+    <Card
+  variant="outlined"
+  style={{
+    textAlign: "center",
+     borderRadius: "30px",
+    margin: "0 auto",
+    padding: "10px",
+    maxWidth: "400px",
+    boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
+  }}
+>
+        <Typography variant="h4" style={{ marginTop: "1rem" }}>
+          Hi {page.substr(0,1).toUpperCase() +page.substr(1)}s
         </Typography>
         <Typography variant="h5" style={{ marginTop: "1rem" }}>
           Welcome To SignUp

@@ -11,12 +11,13 @@ const Navbar = (prop) => {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" style={{ backgroundColor: "black" }}>
             <Toolbar>
-              <Typography variant="h3" sx={{ flexGrow: 1 }} style={{fontFamily: 'Teko'}}>
+              <Typography variant="h3" sx={{ flexGrow: 1 }} style={{ fontFamily: 'Teko' }} key={"logo"}>
                 TVF
               </Typography>
               <div style={{ display: "flex", gap: "15px" }}>
                 {buttonData?.map((x, index) => (
                   <>
+                    {console.log(index)}
                     <Button
                       key={index}
                       variant={"contained"}

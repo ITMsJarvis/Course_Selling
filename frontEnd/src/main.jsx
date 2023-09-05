@@ -9,6 +9,7 @@ import Coures from "./components/Courses/Courses";
 import DashboardAdmin from "./components/Admin/dashboardAdmin";
 import "./main.css"
 import AddCourses from "./components/Courses/AddCourses";
+import CourseOne from "./components/Courses/CourseOne";
 
 const App = () => {
   return (
@@ -27,6 +28,11 @@ const App = () => {
             path={"/admin/dashboard"}
             element={<DashboardAdmin></DashboardAdmin>}
           />
+          <Route
+            path={"/admin/courses/:id"}
+            element={<CourseOne></CourseOne>}
+          />
+          
 
           {/* USERS */}
           <Route path="/user" element={<Users />} />

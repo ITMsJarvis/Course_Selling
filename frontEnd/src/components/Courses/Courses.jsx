@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import AuthGuard from "../../authentication/authGuard";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
-import { Card, Grid, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, Grid, CardContent, CardMedia, Typography, Button } from "@mui/material";
+import { Link } from 'react-router-dom'
 
-const Courses = ({ page }) => {
+const Courses = () => {
   let [content, setContent] = useState(null);
   function deleteToken() {
     localStorage.removeItem("token");
     return (window.location.href = "/");
   }
   let navLinks = {
-    buttonData: [["/admin/addcourses" , "addCourses"],["/admin", "Logout", deleteToken]],
+    buttonData: [["/admin/addcourses", "addCourses"], ["/admin", "Logout", deleteToken]],
   };
   useEffect(() => {
     axios
@@ -22,6 +23,7 @@ const Courses = ({ page }) => {
       })
       .then((response) => setContent(response.data.courses));
   }, []);
+
   return (
     <>
       <Navbar navlink={navLinks}></Navbar>
@@ -39,6 +41,15 @@ const Courses = ({ page }) => {
                 <Typography variant="h6">{x.title}</Typography>
                 <Typography variant="body2">{x.description}</Typography>
                 <Typography variant="subtitle1">${x.price}</Typography>
+                <Button variant="contained" style={{ backgroundColor: "black" }}>
+                  <Link
+                    to={`${x._id}/`}
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    {" "}
+                    Edit
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           </Grid>

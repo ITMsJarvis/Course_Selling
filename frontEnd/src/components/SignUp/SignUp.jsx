@@ -22,24 +22,24 @@ const SignIn = ({ page }) => {
         window.location.href = `/${page}/login`;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
   return (
     <div style={{ marginTop: "10rem" }}>
-    <Card
-  variant="outlined"
-  style={{
-    textAlign: "center",
-     borderRadius: "30px",
-    margin: "0 auto",
-    padding: "10px",
-    maxWidth: "400px",
-    boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
-  }}
->
+      <Card
+        variant="outlined"
+        style={{
+          textAlign: "center",
+          borderRadius: "30px",
+          margin: "0 auto",
+          padding: "10px",
+          maxWidth: "400px",
+          boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
+        }}
+      >
         <Typography variant="h4" style={{ marginTop: "1rem" }}>
-          Hi {page.substr(0,1).toUpperCase() +page.substr(1)}s
+          Hi {page.substr(0, 1).toUpperCase() + page.substr(1)}s
         </Typography>
         <Typography variant="h5" style={{ marginTop: "1rem" }}>
           Welcome To SignUp

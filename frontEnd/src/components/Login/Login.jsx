@@ -32,9 +32,7 @@ const SignIn = ({ page }) => {
         {username :username , password :password},
       )
       .then((response) => {
-        console.log(response);
         let { message, token } = response.data;
-        console.log("===>" , message)
         if (message === "Logged in successfully") {
           localStorage.setItem("token", token);
           navigate(`/${page}/dashboard`);

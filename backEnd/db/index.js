@@ -31,7 +31,7 @@ const courseSchema = new mongoose.Schema(
     description: String,
     price: String,
     imageLink: String,
-    published: Boolean,
+    published: String,
   },
   { timeseries: true }
 );

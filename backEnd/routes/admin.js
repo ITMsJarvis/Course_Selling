@@ -50,8 +50,6 @@ router.post("/courses", authenticateJwt, async (req, res) => {
   const {price, currency} = req.body
   const course = new Course({
     ...req.body,
-    price: `${price} ${currency}` ,
-    id: Math.floor(Math.random() * 10000),
   });
   await course.save();
   res.json({ message: "Course created successfully", courseId: course.id });

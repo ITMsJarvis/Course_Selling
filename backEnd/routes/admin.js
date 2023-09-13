@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+
 const express = require("express");
-const { User, Course, Admin } = require("../db");
+const { Course, Admin } = require("../db");
 const jwt = require("jsonwebtoken");
 const { SECRET } = require("../middleware/auth");
 const { authenticateJwt } = require("../middleware/auth");
@@ -47,12 +47,27 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/courses", authenticateJwt, async (req, res) => {
-  const {price, currency} = req.body
   const course = new Course({
     ...req.body,
   });
   await course.save();
   res.json({ message: "Course created successfully", courseId: course.id });
+});
+
+router.delete("/courses/:id", authenticateJwt, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCourse = await Course.findByIdAndDelete(id);
+
+    if (deletedCourse) {
+      res.json({ message: "Course deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Course not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.put("/courses/:id", authenticateJwt, async (req, res) => {

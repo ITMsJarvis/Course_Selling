@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import AuthGuard from "../../authentication/authGuard";
 const currencies = [
   {
+    value: '₹',
+    label: '₹',
+  },
+  {
     value: '$',
     label: '$',
   },
@@ -15,11 +19,8 @@ const currencies = [
   {
     value: 'BTC',
     label: '฿',
-  },
-  {
-    value: '₹',
-    label: '₹',
-  },
+  }
+
 ];
 
 let styleMargin = {
@@ -98,7 +99,7 @@ const AddCourses = () => {
         <Switch onChange={(e) => setCourseValue({ ...addCourse, published: e.target.checked })} style={{ ...styleMargin }} />
       </div>
 
-      <Button variant='contained' onClick={sendData}>Send</Button>
+      <Button variant='contained' onClick={sendData}>Add Courses</Button>
 
     </Card>
 

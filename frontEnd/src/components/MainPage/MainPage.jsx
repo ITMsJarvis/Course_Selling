@@ -12,7 +12,8 @@ const MainPage = () => {
 
   return (
     <>
-      <MainPageNav navlink={navLinks} />
+      <MainPageNav navlink={navLinks} lovesh={"jarvis"}/>
+     
     </>
   );
 };

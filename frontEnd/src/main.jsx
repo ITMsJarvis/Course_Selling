@@ -5,11 +5,14 @@ import Login from "./components/Login/Login";
 import MainPage from "./components/MainPage/MainPage";
 import Admin from "./components/Admin/Admin";
 import Users from "./components/Users/Users";
-import Coures from "./components/Courses/Courses";
+import Coures from "./components/Admin/AdminCourses";
 import DashboardAdmin from "./components/Admin/dashboardAdmin";
+import DashboardUser from "./components/Users/dashboardUser";
 import "./main.css"
-import AddCourses from "./components/Courses/AddCourses";
-import CourseOne from "./components/Courses/CourseOne";
+import AddCourses from "./components/Admin/AdminAddCourses";
+import CourseOne from "./components/Admin/AdminCourseOne";
+import UsersCourses from "./components/Users/UsersCourses";
+import AuthChecker from './authentication/authGuard2.0'
 
 const App = () => {
   return (
@@ -32,12 +35,19 @@ const App = () => {
             path={"/admin/courses/:id"}
             element={<CourseOne></CourseOne>}
           />
-          
+
 
           {/* USERS */}
           <Route path="/user" element={<Users />} />
-          <Route path="/users/login" element={<Login page={"user"} />} />
-          <Route path="/users/signup" element={<SignUp page={"user"} />} />
+          <Route path="/user/login" element={<Login page={"user"} />} />
+          <Route path="/user/signup" element={<SignUp page={"user"} />} />
+          <Route
+            path={"/user/dashboard"}
+            element={<DashboardUser></DashboardUser>}
+          />  <Route
+            path={"/user/courses"}
+            element={<UsersCourses></UsersCourses>}
+          />
         </Routes>
       </Router>
     </>

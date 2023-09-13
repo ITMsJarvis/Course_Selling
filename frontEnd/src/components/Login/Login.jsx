@@ -25,11 +25,11 @@ const SignIn = ({ page }) => {
   };
 
   function sendData() {
-    let { username, password } = signInData;  
+    let { username, password } = signInData;
     axios
       .post(
         `http://localhost:4000/${page}/login`,
-        {username :username , password :password},
+        { username: username, password: password },
       )
       .then((response) => {
         let { message, token } = response.data;
@@ -51,15 +51,15 @@ const SignIn = ({ page }) => {
 
   return (
     <div style={{ marginTop: "10rem" }}>
-     <Card
+      <Card
         variant="outlined"
         style={{
           textAlign: "center",
-           borderRadius: "30px",
+          borderRadius: "30px",
           margin: "0 auto",
           padding: "10px",
           maxWidth: "400px",
-           boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
+          boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
         }}
       >
         <Typography variant="h3" style={{ marginTop: "1rem" }}>

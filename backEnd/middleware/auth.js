@@ -9,7 +9,8 @@ const authenticateJwt = (req, res, next) => {
       if (err) {
         return res.sendStatus(403);
       }
-      req.data = data; //  {username : username , role :'admin}
+      console.log(data)
+      req.data = data; 
       next();
     });
   } else {

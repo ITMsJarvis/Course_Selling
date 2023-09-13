@@ -16,7 +16,7 @@ const AddCourses = () => {
         price: "",
         imageLink: "",
         currency: "",
-        published: "",
+        published: false,
     })
 
     const { id } = useParams()
@@ -36,7 +36,7 @@ const AddCourses = () => {
                 price: courseData.price,
                 imageLink: courseData.imageLink,
                 currency: courseData.currency,
-                published: courseData.published,
+                published: JSON.parse(courseData.published),
             });
         } catch (error) {
             console.error(error);
@@ -104,10 +104,10 @@ const AddCourses = () => {
             <TextField id="outlined-basic" label="ImageLink" variant="outlined" fullWidth style={styleMargin} onChange={(e) => setCourseValue({ ...addCourse, imageLink: e.target.value })} value={addCourse.imageLink} />
             <div style={styleMargin}>
                 Published
-                <Switch onChange={(e) => setCourseValue({ ...addCourse, published: e.target.checked })} style={{ ...styleMargin }} />
+                <Switch onChange={(e) => setCourseValue({ ...addCourse, published: e.target.checked })} style={{ ...styleMargin }} checked={addCourse.published} />
             </div>
 
-            <Button variant='contained' onClick={sendData}>Send</Button>
+            <Button variant='contained' onClick={sendData}>Update Courses</Button>
 
         </Card>
 

@@ -4,8 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 const Admin = () => {
   let navLinks = {
     buttonData: [
-      ["/users/login", "Login"],
-      ["/users/signup", "SignUp"],
+      ["/user/login", "Login"],
+      ["/user/signup", "SignUp"],
     ],
   };
 

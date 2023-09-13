@@ -17,7 +17,7 @@ const Navbar = (prop) => {
               <div style={{ display: "flex", gap: "15px" }}>
                 {buttonData?.map((x, index) => (
                   <>
-                    {console.log(index)}
+
                     <Button
                       key={index}
                       variant={"contained"}

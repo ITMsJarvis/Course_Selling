@@ -1,11 +1,12 @@
-const mongoose = require("mongoose");
+
 const express = require("express");
-const { User, Course, Admin } = require("../db");
+const { Course, Admin } = require("../db");
 const jwt = require("jsonwebtoken");
 const { SECRET } = require("../middleware/auth");
 const { authenticateJwt } = require("../middleware/auth");
 
 const router = express.Router();
+
 
 router.get("/me", authenticateJwt, async (req, res) => {
   const admin = await Admin.findOne({ username: req.user.username });
@@ -24,18 +25,16 @@ router.post("/signup", (req, res) => {
     if (admin) {
       res.status(403).json({ message: "Admin already exists" });
     } else {
-      const token = jwt.sign({ username, role: "admin" }, SECRET);
-      const obj = { ...req.body, token: token };
-      const newAdmin = new Admin(obj);
+      const newAdmin = new Admin(req.body);
       newAdmin.save();
-      res.json({ message: "Admin created successfully", token });
+      res.json({ message: "Admin created successfully" });
     }
   }
   Admin.findOne({ username }).then(callback);
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.headers;
+  const { username, password } = req.body;
   const admin = await Admin.findOne({ username, password });
   if (admin) {
     const token = jwt.sign({ username, role: "admin" }, SECRET, {
@@ -50,10 +49,25 @@ router.post("/login", async (req, res) => {
 router.post("/courses", authenticateJwt, async (req, res) => {
   const course = new Course({
     ...req.body,
-    id: Math.floor(Math.random() * 10000),
   });
   await course.save();
   res.json({ message: "Course created successfully", courseId: course.id });
+});
+
+router.delete("/courses/:id", authenticateJwt, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCourse = await Course.findByIdAndDelete(id);
+
+    if (deletedCourse) {
+      res.json({ message: "Course deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Course not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.put("/courses/:id", authenticateJwt, async (req, res) => {

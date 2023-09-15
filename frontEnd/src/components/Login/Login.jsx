@@ -8,12 +8,13 @@ import {
   IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const SignIn = ({ page }) => {
+  let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
   const [signInData, setData] = useState({
     username: "",
     password: "",
@@ -25,26 +26,22 @@ const SignIn = ({ page }) => {
 
   function sendData() {
     let { username, password } = signInData;
-
-    fetch(`http://localhost:4000/${page}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        username: username,
-        password: password,
-      },
-    })
-      .then((response) => response.json())
-      .then(({ message, token }) => {
+    axios
+      .post(
+        `http://localhost:4000/${page}/login`,
+        { username: username, password: password },
+      )
+      .then((response) => {
+        let { message, token } = response.data;
         if (message === "Logged in successfully") {
           localStorage.setItem("token", token);
+          navigate(`/${page}/dashboard`);
         } else {
           alert("Invalid Credentials");
         }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
-        alert("Error fetching data");
+        alert(error.response.data.message)
       });
   }
 
@@ -58,9 +55,11 @@ const SignIn = ({ page }) => {
         variant="outlined"
         style={{
           textAlign: "center",
+          borderRadius: "30px",
           margin: "0 auto",
           padding: "10px",
           maxWidth: "400px",
+          boxShadow: "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
         }}
       >
         <Typography variant="h3" style={{ marginTop: "1rem" }}>
@@ -111,12 +110,7 @@ const SignIn = ({ page }) => {
           style={{ backgroundColor: "black" }}
           onClick={sendData}
         >
-          <Link
-            to={`/${page}/dashboard`}
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            {"SignIn"}{" "}
-          </Link>
+          {"SignIn"}
         </Button>
       </Card>
     </div>

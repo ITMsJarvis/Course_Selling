@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 // Define mongoose schemas
 const userSchema = new mongoose.Schema(
   {
-    username: { type: String, minlength: 3, maxlength: 10 },
+    username: { type: String },
     password: { type: String },
     purchasedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
+    firstname: String,
+    lastname: String,
+    token: String,
   },
   { timestamps: true }
 );
@@ -26,9 +29,9 @@ const courseSchema = new mongoose.Schema(
     id: Number,
     title: String,
     description: String,
-    price: Number,
+    price: String,
     imageLink: String,
-    published: Boolean,
+    published: String,
   },
   { timeseries: true }
 );

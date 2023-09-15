@@ -1,13 +1,18 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./index.css";
-import SignUp from "./Pages/SignUp";
-import Login from "./Pages/Login";
-import MainPage from "./Pages/MainPage";
-import Admin from "./pages/admin/Admin";
-import Users from "./pages/user/Users";
-import ProtectedComponent from "./services/HOC";
-// import { Course } from "../../backEnd/db";
+import SignUp from "./components/SignUp/SignUp"
+import Login from "./components/Login/Login";
+import MainPage from "./components/MainPage/MainPage";
+import Admin from "./components/Admin/Admin";
+import Users from "./components/Users/Users";
+import Coures from "./components/Admin/AdminCourses";
+import DashboardAdmin from "./components/Admin/dashboardAdmin";
+import DashboardUser from "./components/Users/dashboardUser";
+import "./main.css"
+import AddCourses from "./components/Admin/AdminAddCourses";
+import CourseOne from "./components/Admin/AdminCourseOne";
+import UsersCourses from "./components/Users/UsersCourses";
+import AuthChecker from './authentication/authGuard2.0'
 
 const App = () => {
   return (
@@ -20,16 +25,29 @@ const App = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<Login page={"admin"} />} />
           <Route path="/admin/signup" element={<SignUp page={"admin"} />} />
+          <Route path={"/admin/courses"} element={<Coures></Coures>} />
+          <Route path={"/admin/addcourses"} element={<AddCourses></AddCourses>} ></Route>
           <Route
-            path={"/admin/dashboard"} element={<ProtectedComponent></ProtectedComponent>}
-          >
-            <Route path="jarvis" element={<div>Wh</div>} />
-          </Route>
+            path={"/admin/dashboard"}
+            element={<DashboardAdmin></DashboardAdmin>}
+          />
+          <Route
+            path={"/admin/courses/:id"}
+            element={<CourseOne></CourseOne>}
+          />
+
 
           {/* USERS */}
           <Route path="/user" element={<Users />} />
-          <Route path="/users/login" element={<Login page={"user"} />} />
-          <Route path="/users/signup" element={<SignUp page={"user"} />} />
+          <Route path="/user/login" element={<Login page={"user"} />} />
+          <Route path="/user/signup" element={<SignUp page={"user"} />} />
+          <Route
+            path={"/user/dashboard"}
+            element={<DashboardUser></DashboardUser>}
+          />  <Route
+            path={"/user/courses"}
+            element={<UsersCourses></UsersCourses>}
+          />
         </Routes>
       </Router>
     </>

@@ -1,27 +1,16 @@
 
-const express = require("express");
-const { Course, Admin } = require("../db");
-const jwt = require("jsonwebtoken");
-const { SECRET } = require("../middleware/auth");
-const { authenticateJwt } = require("../middleware/auth");
+import express from "express"
+import { Request,Response } from "express"
+import { Course, Admin } from "../db"
+import jwt from "jsonwebtoken"
+import {authenticateJwt} from "../middleware/auth"
 
 const router = express.Router();
+let SECRET = "Jib"
 
-
-router.get("/me", authenticateJwt, async (req, res) => {
-  const admin = await Admin.findOne({ username: req.user.username });
-  if (!admin) {
-    res.status(403).json({ msg: "Admin doesnt exist" });
-    return;
-  }
-  res.json({
-    username: admin.username,
-  });
-});
-
-router.post("/signup", (req, res) => {
+router.post("/signup", (req :Request, res : Response) => {
   const { username } = req.body;
-  function callback(admin) {
+  function callback(admin: any) {
     if (admin) {
       res.status(403).json({ message: "Admin already exists" });
     } else {
@@ -92,4 +81,4 @@ router.get("/courses/:id", authenticateJwt, async (req, res) => {
   res.json({ course });
 });
 
-module.exports = router;
+export default router;

@@ -1,19 +1,12 @@
-const jwt = require("jsonwebtoken");
-const express = require("express");
-const { authenticateJwt, SECRET } = require("../middleware/auth");
-const { User, Course, Admin } = require("../db");
+// import { SECRET } from './../middleware/auth';
+import jwt from "jsonwebtoken"
+import express from "express"
+import { authenticateJwt } from "../middleware/auth"
+import { User, Course } from "../db";
 const router = express.Router();
+let SECRET = "Jib"
 
-router.get("/me", authenticateJwt, async (req, res) => {
-  const admin = await User.findOne({ username: req.user.username });
-  if (!admin) {
-    res.status(403).json({ msg: "User doesnt exist" });
-    return;
-  }
-  res.json({
-    username: admin.username,
-  });
-});
+
 
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
@@ -34,7 +27,7 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username, password });
   if (user) {
-    const token = jwt.sign({ username, role: "user" }, SECRET, {
+    const token = jwt.sign({ username : user, role: "user" }, SECRET, {
       expiresIn: "1h",
     });
     res.json({ message: "Logged in successfully", token });
@@ -51,9 +44,9 @@ router.get("/courses", authenticateJwt, async (req, res) => {
 router.post("/courses/:courseId", authenticateJwt, async (req, res) => {
   const course = await Course.findById(req.params.courseId);
   if (course) {
-    const user = await User.findOne({ username: req.user.username });
+    const user = await User.findOne({ username: req.headers["userId"] });
     if (user) {
-      user.purchasedCourses.push(course);
+      user.purchasedCourses.push(course._id);
       await user.save();
       res.json({ message: "Course purchased successfully" });
     } else {
@@ -65,7 +58,7 @@ router.post("/courses/:courseId", authenticateJwt, async (req, res) => {
 });
 
 router.get("/purchasedCourses", authenticateJwt, async (req, res) => {
-  const user = await User.findOne({ username: req.user.username }).populate(
+  const user = await User.findOne({ username: req.headers["data"] }).populate(
     "purchasedCourses"
   );
   if (user) {
@@ -74,5 +67,4 @@ router.get("/purchasedCourses", authenticateJwt, async (req, res) => {
     res.status(403).json({ message: "User not found" });
   }
 });
-
-module.exports = router;
+export default  router;

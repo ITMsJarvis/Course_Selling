@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-const SignIn = ({ page }) => {
+const SignIn = ({ page}) => {
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [signInData, setData] = useState({

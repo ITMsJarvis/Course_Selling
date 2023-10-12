@@ -1,8 +1,8 @@
-import { Typography } from "@mui/material";
-import Navbar from "../../components/Navbar/Navbar";
+
+import {Navbar} from "../Navbar/Navbar";
 
 
-const Admin = () => {
+export const Admin = () => {
   let navLinks = {
     buttonData: [
       ["/admin/login", "Login"],
@@ -19,4 +19,3 @@ const Admin = () => {
   );
 };
 
-export default Admin;

@@ -1,8 +1,7 @@
 import { AppBar, Box, Toolbar, Button, Paper, Typography } from "@mui/material";
-import HubIcon from "@mui/icons-material/Hub";
 import { Link } from "react-router-dom";
 
-const Navbar = (prop) => {
+export const Navbar = (prop) => {
   let { buttonData } = prop.navlink;
   let whiteBackground = ["Admin", "User", "Login", "SignUp", "Logout"];
   return (
@@ -54,4 +53,3 @@ const Navbar = (prop) => {
   );
 };
 
-export default Navbar;

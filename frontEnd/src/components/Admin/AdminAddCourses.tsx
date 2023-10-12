@@ -2,7 +2,7 @@ import { TextField, Card, MenuItem, Button, Switch } from '@mui/material';
 import { useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import AuthGuard from "../../authentication/authGuard";
+import {AuthGuard} from "../../authentication/authGuard";
 const currencies = [
   {
     value: '₹',
@@ -28,7 +28,7 @@ let styleMargin = {
 }
 const AddCourses = () => {
   let navigate = useNavigate();
-  const handlePriceChange = (e) => {
+  const handlePriceChange = (e : any) => {
 
     const numericValue = e.target.value.replace(/[^0-9.]/g, '');
     setCourseValue({ ...addCourse, price: numericValue });
@@ -58,7 +58,7 @@ const AddCourses = () => {
     price: "",
     imageLink: "",
     currency: "",
-    published: "",
+    published: false,
   })
 
   return <div style={{ marginTop: '10rem' }}>

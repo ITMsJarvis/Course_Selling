@@ -1,15 +1,14 @@
 
 import express from "express"
 import { Request,Response } from "express"
-import { Course, Admin } from "../db"
+import { Course, Admin } from "../model/index"
 import jwt from "jsonwebtoken"
 import {authenticateJwt} from "../middleware/auth"
 
 const router = express.Router();
 let SECRET = "Jib"
 
-router.post("/signup", (req :Request, res : Response) => {
-  
+router.post("/signup", (req, res) => {
   const { username } = req.body;
   if(!username){
  res.status(200).json({message : "Username not provided"})

@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken"
 import express from "express"
 import { authenticateJwt } from "../middleware/auth"
-import { User, Course } from "../db";
+import { User, Course } from "../model/index";
 const router = express.Router();
 let SECRET = "Jib"
 

@@ -1,10 +1,10 @@
 
-import React, { useEffect, useState } from "react";
-import {Typography} from "@mui/material"
+import React, { useEffect } from "react";
+import { Typography } from "@mui/material"
 
-const AuthGuard = (WrappedComponent) => {
+export  const AuthGuard = (WrappedComponent : any) => {
 
-  const GuardedComponent = (props) => {
+  const GuardedComponent = (props: any) => {
     const [isAuthenticated, setAuthentaction] = React.useState(false);
 
     useEffect(() => {
@@ -31,4 +31,4 @@ const AuthGuard = (WrappedComponent) => {
   return GuardedComponent;
 };
 
-export default AuthGuard;
+

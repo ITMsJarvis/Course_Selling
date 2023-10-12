@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AuthGuard = (WrappedComponent) => {
-    return function WithAuthGuard(props) {
+const AuthGuard = (WrappedComponent:any) => {
+    return function WithAuthGuard(props:any) {
         const navigate = useNavigate(); // This should be inside the functional component
 
         const [isAuthenticated, setIsAuthenticated] = useState(false);

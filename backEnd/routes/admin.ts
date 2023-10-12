@@ -9,7 +9,11 @@ const router = express.Router();
 let SECRET = "Jib"
 
 router.post("/signup", (req :Request, res : Response) => {
+  
   const { username } = req.body;
+  if(!username){
+ res.status(200).json({message : "Username not provided"})
+  }
   function callback(admin: any) {
     if (admin) {
       res.status(403).json({ message: "Admin already exists" });

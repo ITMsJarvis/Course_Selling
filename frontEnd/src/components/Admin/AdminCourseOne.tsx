@@ -1,8 +1,8 @@
-import { TextField, Card, MenuItem, Button, Switch } from '@mui/material';
+import { TextField, Card, Button, Switch } from '@mui/material';
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import AuthGuard from "../../authentication/authGuard";
+import {AuthGuard} from "../../authentication/authGuard";
 
 let styleMargin = {
     marginBottom: '10px'
@@ -51,7 +51,7 @@ const AddCourses = () => {
 
 
 
-    const handlePriceChange = (e) => {
+    const handlePriceChange = (e:any) => {
         const numericValue = e.target.value.replace(/[^0-9.]/g, '');
         setCourseValue({ ...addCourse, price: numericValue });
     };

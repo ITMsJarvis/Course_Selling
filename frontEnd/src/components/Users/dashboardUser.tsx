@@ -1,5 +1,5 @@
-import AuthGuard from "../../authentication/authGuard";
-import Navbar from "../Navbar/Navbar";
+import {AuthGuard} from "../../authentication/authGuard";
+import {Navbar} from "../Navbar/Navbar";
 
 const dashboardUser = () => {
     function deleteToken() {

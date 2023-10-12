@@ -1,7 +1,7 @@
 import { AppBar, Box, Toolbar, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export const Navbar = (prop) => {
+export const Navbar = (prop:any) => {
   let { buttonData } = prop.navlink;
   let whiteBackground = ["Admin", "User", "Login", "SignUp", "Logout"];
   return (
@@ -14,9 +14,7 @@ export const Navbar = (prop) => {
                 TVF
               </Typography>
               <div style={{ display: "flex", gap: "15px" }}>
-                {buttonData?.map((x, index) => (
-                  <>
-
+                {buttonData?.map((x:any, index:string) => (
                     <Button
                       key={index}
                       variant={"contained"}
@@ -27,7 +25,6 @@ export const Navbar = (prop) => {
                           ? "white"
                           : "black",
                       }}
-                      mr="5"
                       onClick={x[2] ? x[2] : null}
                     >
                       <Link
@@ -42,7 +39,6 @@ export const Navbar = (prop) => {
                         {x[1]}
                       </Link>
                     </Button>
-                  </>
                 ))}
               </div>
             </Toolbar>

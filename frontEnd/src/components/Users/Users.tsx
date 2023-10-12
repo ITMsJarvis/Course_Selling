@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import Navbar from "../../components/Navbar/Navbar";
+import {Navbar} from "../Navbar/Navbar";
 
 const Admin = () => {
   let navLinks = {

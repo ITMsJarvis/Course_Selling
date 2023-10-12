@@ -1,4 +1,4 @@
-import MainPageNav from "../Navbar/Navbar";
+import {Navbar} from "../Navbar/Navbar";
 const MainPage = () => {
   let navLinks = {
     buttonData: [
@@ -12,7 +12,7 @@ const MainPage = () => {
 
   return (
     <>
-      <MainPageNav navlink={navLinks} lovesh={"jarvis"}/>
+      <Navbar navlink={navLinks} lovesh={"jarvis"}/>
      
     </>
   );

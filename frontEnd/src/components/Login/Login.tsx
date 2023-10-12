@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-const SignIn = ({ page}) => {
+export const Login = (props: any) => {
+  let {page} = props
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [signInData, setData] = useState({
@@ -20,7 +21,7 @@ const SignIn = ({ page}) => {
     password: "",
   });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
+  const handleMouseDownPassword = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
   };
 
@@ -35,7 +36,7 @@ const SignIn = ({ page}) => {
         let { message, token } = response.data;
         if (message === "Logged in successfully") {
           localStorage.setItem("token", token);
-          navigate(`/${page}/dashboard`);
+          navigate(`/${props.page}/dashboard`);
         } else {
           alert("Invalid Credentials");
         }
@@ -116,5 +117,3 @@ const SignIn = ({ page}) => {
     </div>
   );
 };
-
-export default SignIn;

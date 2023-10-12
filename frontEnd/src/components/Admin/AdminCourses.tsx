@@ -44,11 +44,9 @@ const Courses = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          // If the delete request was successful, you can update your UI or perform other actions as needed.
-          // For example, you can remove the deleted course from your content state.
           setContent((prevContent) => {
   if (prevContent === null) {
-    return null; // Return null when prevContent is null
+    return null;
   } else {
     return prevContent.filter((course) => course._id !== courseId);
   }

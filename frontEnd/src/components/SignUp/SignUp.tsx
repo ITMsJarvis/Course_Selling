@@ -1,10 +1,10 @@
 import { Typography, Card, TextField, Button } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const SignIn = ({ page }) => {
+const SignIn = (props:any) => {
+  let {page} = props
   let [signUpData, setData] = useState({
     firstname: "",
     lastname: "",

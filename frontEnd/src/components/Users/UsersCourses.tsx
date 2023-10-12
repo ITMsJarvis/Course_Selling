@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import AuthGuard from "../../authentication/authGuard";
-import Navbar from "../Navbar/Navbar";
+import {AuthGuard} from "../../authentication/authGuard";
+import {Navbar} from "../Navbar/Navbar";
 import axios from "axios";
 import {
     Card,
@@ -13,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Courses = () => {
-    let [content, setContent] = useState(null);
+    let [content, setContent] = useState([]);
     function deleteToken() {
         localStorage.removeItem("token");
         return (window.location.href = "/");
@@ -45,7 +45,7 @@ const Courses = () => {
                 margin={1}
                 spacing={5}
             >
-                {content?.map((x) => (
+                { content?.map((x: any) => (
                     <Grid item key={x._id} xs={12} sm={6} md={3} lg={3}>
                         <Card>
                             <CardMedia
@@ -72,7 +72,7 @@ const Courses = () => {
                             </CardContent>
                         </Card>
                     </Grid>
-                ))}
+                ))} 
             </Grid>
         </>
     );

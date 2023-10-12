@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignUp from "./components/SignUp/SignUp"
 import {Login} from "./components/Login/Login";
-import {MainPage} from "./components/MainPage/MainPage";
+import MainPage from "./components/MainPage/MainPage";
 import {Admin} from "./components/Admin/Admin";
 import Users from "./components/Users/Users";
 import Coures from "./components/Admin/AdminCourses";
@@ -12,7 +12,6 @@ import "./main.css"
 import AddCourses from "./components/Admin/AdminAddCourses";
 import CourseOne from "./components/Admin/AdminCourseOne";
 import UsersCourses from "./components/Users/UsersCourses";
-import AuthChecker from './authentication/authGuard2.0'
 
 const App = () => {
   return (
@@ -54,4 +53,4 @@ const App = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);
